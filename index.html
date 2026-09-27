@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Google Birthday — My Gift</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#f8fbff,#ffffff);
+    color:#202124;
+    overflow-x:hidden;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    font-size:16px;
+}
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    background:white;
+    animation:introOut 1s ease 3.5s forwards;
+}
+
+.intro-g{
+    font-size:110px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#4285f4,#34a853,#fbbc05,#ea4335,#4285f4);
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:rainbow 2s linear infinite, pop 1s ease;
+}
+
+.intro-text{
+    margin-top:15px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+@keyframes rainbow{
+    0%{background-position:0%}
+    100%{background-position:300%}
+}
+
+@keyframes pop{
+    0%{transform:scale(.2);opacity:0}
+    70%{transform:scale(1.15)}
+    100%{transform:scale(1);opacity:1}
+}
+
+@keyframes introOut{
+    to{opacity:0;visibility:hidden}
+}
+
+header{
+    text-align:center;
+    padding:55px 20px 30px;
+}
+
+.logo{
+    font-size:100px;
+    font-weight:bold;
+    background:linear-gradient(90deg,#4285f4,#34a853,#fbbc05,#ea4335,#4285f4);
+    background-size:300%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:rainbow 5s linear infinite;
+}
+
+h1{
+    font-size:34px;
+    margin-top:10px;
+}
+
+.subtitle{
+    margin-top:10px;
+    color:#5f6368;
+    font-size:17px;
+}
+
+section{
+    width:min(900px,92%);
+    margin:35px auto;
+}
+
+.card{
+    background:white;
+    border-radius:22px;
+    padding:28px;
+    margin-bottom:25px;
+    box-shadow:0 8px 30px rgba(60,64,67,.12);
+    border:1px solid #eee;
+}
+
+.card h2{
+    margin-bottom:12px;
+}
+
+.center{
+    text-align:center;
+}
+
+.primary{
+    background:#1a73e8;
+    color:white;
+    padding:13px 23px;
+    border-radius:30px;
+    margin:8px;
+    transition:.2s;
+}
+
+.primary:hover{
+    transform:scale(1.05);
+}
+
+.secondary{
+    background:#f1f3f4;
+    color:#202124;
+    padding:13px 23px;
+    border-radius:30px;
+    margin:8px;
+}
+
+.cake{
+    font-size:90px;
+    margin:20px;
+    transition:.5s;
+}
+
+.cake.wish{
+    transform:scale(1.2) rotate(4deg);
+}
+
+input{
+    width:min(400px,90%);
+    padding:14px;
+    border:1px solid #dadce0;
+    border-radius:12px;
+    font-size:16px;
+    margin:10px 0;
+}
+
+#message{
+    margin-top:18px;
+    font-size:19px;
+    font-weight:bold;
+    min-height:30px;
+}
+
+.timeline{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+}
+
+.time-card{
+    background:#f8f9fa;
+    padding:20px;
+    border-radius:18px;
+    text-align:center;
+    transition:.2s;
+}
+
+.time-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.year{
+    font-size:25px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.gift{
+    background:linear-gradient(135deg,#e8f0fe,#fce8e6,#e6f4ea);
+}
+
+.future{
+    text-align:center;
+}
+
+.future span{
+    display:inline-block;
+    padding:12px 18px;
+    margin:7px;
+    background:#f1f3f4;
+    border-radius:30px;
+}
+
+footer{
+    text-align:center;
+    padding:40px 20px;
+    color:#5f6368;
+    font-size:14px;
+}
+
+#confetti{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:999;
+}
+
+.conf{
+    position:absolute;
+    width:9px;
+    height:14px;
+    animation:fall 2.5s linear forwards;
+}
+
+@keyframes fall{
+    from{
+        transform:translateY(-30px) rotate(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(105vh) rotate(720deg);
+        opacity:0;
+    }
+}
+
+@media(max-width:650px){
+    .logo{
+        font-size:75px;
+    }
+
+    h1{
+        font-size:27px;
+    }
+
+    .timeline{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .card{
+        padding:22px;
+    }
+}
+
+@media(max-width:400px){
+    .timeline{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+    <div class="intro-g">G</div>
+    <div class="intro-text">🎉 Happy Birthday, Google! 🎂</div>
+</div>
+
+<div id="confetti"></div>
+
+<header>
+    <div class="logo">G</div>
+    <h1>Happy Birthday, Google! 🎉</h1>
+    <p class="subtitle">A small fan-made birthday gift created with code.</p>
+</header>
+
+<section>
+
+<div class="card center">
+    <h2>🎂 Make a Birthday Wish</h2>
+    <div id="cake" class="cake">🎂</div>
+
+    <button class="primary" onclick="makeWish()">
+        ✨ Make a Wish
+    </button>
+
+    <p id="wishText"></p>
+</div>
+
+<div class="card center">
+    <h2>💌 Birthday Message Generator</h2>
+
+    <input id="name" type="text" placeholder="Enter your name">
+
+    <br>
+
+    <button class="primary" onclick="generateMessage()">
+        🤖 Generate Message
+    </button>
+
+    <div id="message"></div>
+</div>
+
+<div class="card gift center">
+    <h2>🎁 My Gift to Google</h2>
+
+    <p>
+        Thank you for helping people around the world
+        search, learn, discover and create.
+    </p>
+
+    <br>
+
+    <p>
+        May the next chapter bring even more
+        amazing ideas and technology. 🚀
+    </p>
+
+    <br>
+
+    <strong>— Yatharth</strong>
+</div>
+
+<div class="card">
+    <h2>🕰️ A Small Google Journey</h2>
+
+    <div class="timeline">
+
+        <div class="time-card">
+            <div class="year">1998</div>
+            <p>Google begins its journey.</p>
+        </div>
+
+        <div class="time-card">
+            <div class="year">2004</div>
+            <p>Google becomes a major search platform.</p>
+        </div>
+
+        <div class="time-card">
+            <div class="year">2008</div>
+            <p>Chrome joins Google's growing ecosystem.</p>
+        </div>
+
+        <div class="time-card">
+            <div class="year">Today</div>
+            <p>Search, AI, cloud and many technologies.</p>
+        </div>
+
+    </div>
+</div>
+
+<div class="card future">
+    <h2>🚀 Future Ideas</h2>
+
+    <p>
+        What might technology look like in the future?
+    </p>
+
+    <br>
+
+    <span>🤖 AI</span>
+    <span>🌌 Space</span>
+    <span>🔬 Research</span>
+    <span>⚡ Computing</span>
+    <span>🌍 Global Technology</span>
+</div>
+
+<div class="card center">
+    <h2>🔗 Share This Gift</h2>
+
+    <p>
+        Share this little birthday project with someone.
+    </p>
+
+    <br>
+
+    <button class="primary" onclick="shareProject()">
+        📤 Share
+    </button>
+
+    <button class="secondary" onclick="copyLink()">
+        🔗 Copy Link
+    </button>
+
+    <p id="shareStatus"></p>
+</div>
+
+</section>
+
+<footer>
+    🎉 A fan-made Google Birthday project created as a learning project.
+</footer>
+
+<script>
+
+function makeWish(){
+
+    const cake = document.getElementById("cake");
+    const text = document.getElementById("wishText");
+
+    cake.classList.add("wish");
+
+    text.innerHTML =
+        "✨ Wish made! May the future be full of amazing ideas! 🚀";
+
+    createConfetti();
+
+    setTimeout(()=>{
+        cake.classList.remove("wish");
+    },800);
+}
+
+
+function createConfetti(){
+
+    const container = document.getElementById("confetti");
+
+    for(let i=0;i<80;i++){
+
+        const piece = document.createElement("div");
+
+        piece.className = "conf";
+
+        piece.style.left =
+            Math.random()*100 + "%";
+
+        piece.style.background =
+            ["#4285f4","#34a853","#fbbc05","#ea4335"]
+            [Math.floor(Math.random()*4)];
+
+        piece.style.animationDelay =
+            Math.random()*0.5 + "s";
+
+        container.appendChild(piece);
+
+        setTimeout(()=>{
+            piece.remove();
+        },3000);
+    }
+}
+
+
+function generateMessage(){
+
+    const name =
+        document.getElementById("name").value.trim();
+
+    const message =
+        document.getElementById("message");
+
+    if(!name){
+
+        message.innerHTML =
+            "Please enter your name first 🙂";
+
+        return;
+    }
+
+    const messages = [
+
+        `🎉 Happy Birthday, Google! — ${name} wishes you an amazing year ahead!`,
+
+        `🚀 From ${name}: Keep helping the world learn, discover and create!`,
+
+        `💙 ${name} wishes Google many more years of innovation and amazing technology!`
+
+    ];
+
+    const random =
+        messages[Math.floor(Math.random()*messages.length)];
+
+    message.innerHTML = random;
+}
+
+
+async function shareProject(){
+
+    const shareData = {
+
+        title:"My Google Birthday Doodle",
+
+        text:"🎉 I made a fan-made Google Birthday project!",
+
+        url:window.location.href
+
+    };
+
+    if(navigator.share){
+
+        try{
+
+            await navigator.share(shareData);
+
+        }catch(error){}
+
+    }else{
+
+        copyLink();
+
+    }
+}
+
+
+function copyLink(){
+
+    navigator.clipboard.writeText(
+        window.location.href
+    );
+
+    document.getElementById("shareStatus")
+        .innerHTML =
+        "✅ Link copied!";
+}
+
+</script>
+
+</body>
+</html>
