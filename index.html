@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Google Birthday Doodle</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fa;
+            color: #202124;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        header {
+            padding: 30px 15px 10px;
+        }
+
+        header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            color: #5f6368;
+            font-size: 16px;
+        }
+
+        .doodle {
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .google-g {
+            font-size: 170px;
+            font-weight: bold;
+            line-height: 1;
+            cursor: pointer;
+
+            background: linear-gradient(
+                90deg,
+                #4285f4 25%,
+                #34a853 25% 50%,
+                #fbbc05 50% 75%,
+                #ea4335 75%
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        .title {
+            font-size: 34px;
+            margin-top: 15px;
+        }
+
+        .subtitle {
+            color: #5f6368;
+            margin-top: 10px;
+        }
+
+        button {
+            border: none;
+            border-radius: 25px;
+            padding: 13px 22px;
+            margin: 15px 5px;
+            font-size: 15px;
+            cursor: pointer;
+            background: #4285f4;
+            color: white;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .section {
+            max-width: 850px;
+            margin: 30px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        .section h2 {
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 85%;
+            max-width: 400px;
+            padding: 13px 18px;
+            border: 1px solid #dadce0;
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+        }
+
+        #message {
+            margin-top: 15px;
+            padding: 18px;
+            background: #f1f3f4;
+            border-radius: 15px;
+            min-height: 60px;
+            line-height: 1.6;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(150px, 1fr)
+            );
+
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .card {
+            padding: 20px 10px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border: 1px solid #eeeeee;
+        }
+
+        .card h3 {
+            margin-bottom: 8px;
+        }
+
+        #gift {
+            display: none;
+            margin-top: 15px;
+            padding: 20px;
+            background: #e8f0fe;
+            border-radius: 15px;
+            line-height: 1.7;
+        }
+
+        #future {
+            margin-top: 15px;
+            line-height: 1.7;
+        }
+
+        footer {
+            padding: 30px 15px;
+            color: #5f6368;
+        }
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            width: 10px;
+            height: 10px;
+            z-index: 9999;
+
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform:
+                    translateY(110vh)
+                    rotate(720deg);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .google-g {
+                font-size: 120px;
+            }
+
+            .title {
+                font-size: 27px;
+            }
+
+            .section {
+                margin: 20px 12px;
+                padding: 20px 15px;
+            }
+
+            input {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎉 Google Birthday Doodle 🎉</h1>
+
+        <p>
+            A small birthday project made with HTML,
+            CSS and JavaScript.
+        </p>
+    </header>
+
+
+    <!-- GOOGLE DOODLE -->
+
+    <section class="doodle">
+
+        <div
+            class="google-g"
+            onclick="celebrate()"
+        >
+            G
+        </div>
+
+        <h2 class="title">
+            Happy Birthday, Google! 🎂
+        </h2>
+
+        <p class="subtitle">
+            Click the G to start the celebration!
+        </p>
+
+        <button onclick="celebrate()">
+            🎉 Celebrate
+        </button>
+
+    </section>
+
+
+    <!-- MESSAGE GENERATOR -->
+
+    <section class="section">
+
+        <h2>🤖 Birthday Message Generator</h2>
+
+        <p>
+            अपना नाम लिखो और Google के लिए
+            एक birthday message बनाओ।
+        </p>
+
+        <br>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="अपना नाम लिखें"
+        >
+
+        <br>
+
+        <button onclick="generateMessage()">
+            🤖 Generate Message
+        </button>
+
+        <div id="message">
+            आपका message यहाँ दिखाई देगा।
+        </div>
+
+    </section>
+
+
+    <!-- GOOGLE JOURNEY -->
+
+    <section class="section">
+
+        <h2>🔍 Google Journey</h2>
+
+        <div class="timeline">
+
+            <div class="card">
+                <h3>1998</h3>
+                <p>
+                    Google became an official company.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>2004</h3>
+                <p>
+                    Google became a public company.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>2008</h3>
+                <p>
+                    Android became an important part
+                    of Google's ecosystem.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Today</h3>
+                <p>
+                    Google works across Search,
+                    AI, Android, Cloud and more.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GIFT -->
+
+    <section class="section">
+
+        <h2>🎁 My Gift to Google</h2>
+
+        <p>
+            A small project made with curiosity,
+            learning and code.
+        </p>
+
+        <button onclick="showGift()">
+            🎁 Open My Gift
+        </button>
+
+        <div id="gift">
+
+            <strong>Dear Google,</strong>
+
+            <br><br>
+
+            Thank you for helping people learn,
+            discover, create and connect with information.
+
+            <br><br>
+
+            This small project is my birthday gift to you.
+
+            <br><br>
+
+            <strong>
+                Keep helping the world learn. 🚀
+            </strong>
+
+        </div>
+
+    </section>
+
+
+    <!-- FUTURE -->
+
+    <section class="section">
+
+        <h2>🚀 My Vision of the Future</h2>
+
+        <p>
+            I imagine a future where AI helps students
+            learn better and technology helps people
+            turn ideas into reality.
+        </p>
+
+        <button onclick="showFuture()">
+            🌟 Show Future Idea
+        </button>
+
+        <div id="future"></div>
+
+    </section>
+
+
+    <footer>
+        Made with ❤️, curiosity and code.
+        <br><br>
+        HTML • CSS • JavaScript
+    </footer>
+
+
+    <script>
+
+        // Celebration
+
+        function celebrate() {
+
+            for (let i = 0; i < 80; i++) {
+
+                const confetti =
+                    document.createElement("div");
+
+                confetti.className = "confetti";
+
+                confetti.style.left =
+                    Math.random() * 100 + "vw";
+
+                confetti.style.backgroundColor =
+                    randomColor();
+
+                confetti.style.animationDuration =
+                    (2 + Math.random() * 3) + "s";
+
+                document.body.appendChild(confetti);
+
+                setTimeout(function () {
+                    confetti.remove();
+                }, 5000);
+            }
+
+            alert("🎉 Happy Birthday, Google! 🎂");
+        }
+
+
+        // Random Google colors
+
+        function randomColor() {
+
+            const colors = [
+                "#4285F4",
+                "#34A853",
+                "#FBBC05",
+                "#EA4335"
+            ];
+
+            const index =
+                Math.floor(
+                    Math.random() * colors.length
+                );
+
+            return colors[index];
+        }
+
+
+        // Birthday message
+
+        function generateMessage() {
+
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+            const message =
+                document.getElementById("message");
+
+            if (name === "") {
+
+                message.innerHTML =
+                    "⚠️ पहले अपना नाम लिखो।";
+
+                return;
+            }
+
+            const messages = [
+
+                "🎂 Happy Birthday Google! " +
+                name +
+                " की तरफ से तुम्हें ढेरों शुभकामनाएँ! " +
+                "तुम्हारी technology लोगों को हर दिन " +
+                "कुछ नया सीखने में मदद करती रहे। 🚀",
+
+                "🔍 Dear Google, " +
+                name +
+                " की तरफ से birthday wishes! " +
+                "तुम्हारी innovation की journey " +
+                "हमेशा आगे बढ़ती रहे। 🎉",
+
+                "🤖 Happy Birthday Google! " +
+                name +
+                " का छोटा सा gift: सीखना, " +
+                "experiment करना और technology से " +
+                "कुछ नया बनाना। 🚀"
+
+            ];
+
+            const index =
+                Math.floor(
+                    Math.random() * messages.length
+                );
+
+            message.innerHTML =
+                messages[index];
+
+            celebrate();
+        }
+
+
+        // Gift
+
+        function showGift() {
+
+            const gift =
+                document.getElementById("gift");
+
+            gift.style.display = "block";
+
+            celebrate();
+        }
+
+
+        // Future idea
+
+        function showFuture() {
+
+            const future =
+                document.getElementById("future");
+
+            future.innerHTML = `
+                <div style="
+                    margin-top: 15px;
+                    padding: 20px;
+                    background: #f8f9fa;
+                    border-radius: 15px;
+                ">
+
+                    💡 <strong>Future Idea</strong>
+
+                    <br><br>
+
+                    Imagine an AI tutor that understands
+                    how a student learns and creates a
+                    personalized learning path.
+
+                    <br><br>
+
+                    <strong>
+                        Learn → Build → Experiment → Improve
+                    </strong>
+
+                </div>
+            `;
+        }
+
+    </script>
+
+</body>
+</html>
